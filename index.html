@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HangMan</title>
+    <link rel="stylesheet" href="assets/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/game.js"></script>
+    
+</head>
+<body>
+    
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary text-center">
+            <div class="panel-body">
+                <h1>HangMan</h1>
+                <hr>
+                <p></p>
+                <p>
+                        Wins: (# of times user guessed the word correctly).
+                        <br>
+                        If the word is madonna, display it like this when the game starts: _ _ _ _ _ _ _.
+                        <br>
+                        As the user guesses the correct letters, reveal them: m a d o _  _ a.
+                        <br>
+                        Number of Guesses Remaining: (# of guesses remaining for the user).
+                        <br>
+                        Letters Already Guessed: (Letters the user has guessed, displayed like L Z Y H)                        
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel-default">
+            <div class="panel-body text-center"></div>
+                <h2 class="text-center" id="adder"></h2>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <form>
+            <div class="form-group myForm">
+                <label for="userText">Enter Letter</label>
+                <textarea class="form-control" id="userText" rows="1"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="reLoad()">Restart</button>
+        </form>
+        <br><br><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body panel-success">
+                Number of Guesses Remaining:
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body panel-success">
+                <span id="remain"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class=panel-body>
+            space
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body panel-success">
+                Letters Already Guessed:
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body panel-success">
+                <span id="picks"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class=panel-body>
+            space
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="assets/javascript/game.js"></script> -->
+</body>
+</html>
