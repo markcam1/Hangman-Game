@@ -4,19 +4,16 @@ $(document).ready(function(){
     var remainChoice = 8;
     var spanTag = 100;
     
-    var testArr = [
-        "a",
-        "b",
-        "c",
-        "d"
-    ]
+    var testArr = ["a","b","b","b"]
+    var arrTwo = ["x","x","y","z"]
     
-    function setStart(){
-        $(testArr).each(function(){
-            this.remainChoice = remainChoice;
-            xx = spanTag;
+    function setStart(arrStart){
 
-            $("#adder").append($("<span>").attr("id", xx).text(" __ "))
+        $(arrStart).each(function(){
+            this.remainChoice = remainChoice;
+            spanNum = spanTag;
+
+            $("#adder").append($("<span>").attr("id", spanNum).text(" __ "))
             $("#remain").text(this.remainChoice);
             spanTag++
         })
@@ -33,40 +30,44 @@ $(document).ready(function(){
         $("#picks").prepend($("<span>").text(allUserChoices));
     }
     
-    function checkLetter (letterToBeChecked){
-        //do I need the line below
-        this.letterToBeChecked = letterToBeChecked
-        indexNum = testArr.indexOf(this.letterToBeChecked);
-
-        if ( indexNum === -1) {
-            remainChoice--
-
-            //dec Guesses Remaining
-
-        }
-        else if ( indexNum !== -1) {
-           var ss = indexNum.toString();
-           var zz = "#10" + ss;
-           $(zz).text(testArr[indexNum]);
-           console.log(zz);
+    function goodLetter (goodStr, startIndex){
         
-            //find index/letter and paint page
+        this.goodStr = goodStr
+        this.startIndex = startIndex
+        var indexNum = testArr.indexOf(this.goodStr, startIndex);
 
+        if ( indexNum !== -1) {
+           var strIndex = indexNum.toString();
+           var spanIdStr = "#10" + strIndex;
+           $(spanIdStr).text(testArr[indexNum]);
+
+           goodLetter(goodStr, indexNum + 1);
+
+           console.log(spanIdStr);
+           console.log(indexNum);
+           console.log(this.letterToBeChecked);
+        }else {
+            alert("good pick");
         }
-        setBoard(this.letterToBeChecked);
     }
-
     
-    $("#userText").on("keydown", function myFunction(event) {
-        var userChoice = event.key;
+    $("#userText").on("keyup", function mainFunction(event) {
+        var userChoice = event.key.toLowerCase();
         checkLetter(userChoice);
+        //need to see if this call can be moved
+        setBoard(userChoice);
 
-        // if (userChoice == "a" || userChoice == "A") { 
-        //     alert ("You pressed the 'A' key!");
-        // }
-
-
-
+            function checkLetter (letterToBeChecked){
+                //do I need the line below
+                this.letterToBeChecked = letterToBeChecked
+                var ttt = testArr.includes(this.letterToBeChecked);
+                if ( ttt === true) {
+                    goodLetter(letterToBeChecked, 0)
+                }
+                else if ( ttt === false) {
+                    remainChoice--        
+                }
+            }
     });
     
 
