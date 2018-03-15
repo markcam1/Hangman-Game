@@ -1,0 +1,25 @@
+body{
+    background-image: url(../images/startBG.jpg);
+}
+
+.myForm {
+    display: none;
+}
+
+#posKeep {
+    background-color: #D6DBDF;
+}
+
+.jumbotron {
+    background-image: url(../images/svBG.png);
+    
+} 
+
+.executioner {
+    height: 150px;
+    width: 150px;
+}
+
+h1 {
+    font-family: fantasy;
+}

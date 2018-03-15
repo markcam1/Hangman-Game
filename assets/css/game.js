@@ -5,27 +5,30 @@ $(document).ready(function(){
     var userChoice;
     var remainChoice = 8;
     var spanTag = 100;
+    var arrStart;
     var lettersToWin = 0;
     var currentGameArr = [];
     var doneLetters = [];
-    var garbChecker = [];
+    var ddd = [];
     var totalGamesWon = 0;
     var totalGamesLost = 0;
 
 
-    var hunchObj = { arr1: ["q", "u", "a","s","i","m","o","d","o"], garbArr: [], gameName: "hunch", link: "assets/images/hunch.png"};
-    var psychoObj = { arr1: ["n","o","r","m","a","n","b","a","t","e","s"], garbArr: [], gameName: "psycho", link: "assets/images/psy.jpg"};
-    var sawObj = { arr1: ["b", "i", "l", "l", "y"], garbArr: [], gameName: " Jigsaw", link: "assets/images/saw.jpg"};
-    var nightObj = { arr1: ["f","r","e","d","d","y"], garbArr: [], gameName: "Nightmare", link: "assets/images/fred.jpg"};
+    var arrTest1 = { arr1: ["a", "b", "c"], garbArr: [], gameName: "cam1", link: "https://www.w3schools.com/js/js_objects.asp"};
+    var arrTest2 = { arr1: ["x", "y", "z", "q","w"], garbArr: [], gameName: "cam1000", link: "https://www.w3schools.com/js/js_objects.asp"};
+    var arrTest3 = { arr1: ["e", "e", "s", "p"], garbArr: [], gameName: "cam1000", link: "https://www.w3schools.com/js/js_objects.asp"};
+    var arrTest4 = { arr1: ["l", "o", "o","p"], garbArr: [], gameName: "cam1000", link: "https://www.w3schools.com/js/js_objects.asp"};
     
-    var allGameObj = [nightObj, sawObj, psychoObj, hunchObj];
+    var allGameObj = [arrTest1, arrTest2, arrTest3, arrTest4];
     
     function setStart(arrV){
         //set html before blank letter load
         $("#posKeep").remove();
         $("#posParent").append($("<h2>").attr("id", "posKeep"));
 
+        
         $(arrV).each(function(){
+            this.remainChoice = remainChoice;
             spanNum = spanTag;
             lettersToWin++;
 
@@ -41,42 +44,49 @@ $(document).ready(function(){
 
         window.currentGarbageArr = currentGarbageArr;
     };
-    function garbageLetters(throwAwayLetter){
-        currentGarbageArr.push(throwAwayLetter);
-        setBoard(throwAwayLetter);
+
+
+    //new##################
+
+    function garbageLetters(ggg){
+
+        currentGarbageArr.push(ggg);
+        console.log("garbage: " + ggg)
     }
 
-    function winner(){
-        objCall();
-        totalGamesWon++;
-        remainChoice = 8;
-        $("#winBrowser").text(totalGamesWon);
-    }
+    
 
-    function loser (){
-        totalGamesLost++;
-        $("#lostBrowser").text(totalGamesLost);
-        remainChoice = 8;
-        objCall();
-    }
-
-    function setBoard(throwAwayLetter){
+    function setBoard(allUserChoices){
         
         this.remainChoice = remainChoice;
         $("#remain").text(this.remainChoice);
-        console.log("board remain: " + remainChoice);
+        console.log(remainChoice);
+
 
         if (lettersToWin === 0 ) {
-            // objSetGarbarge();
-            winner();
+            objCall();
+            objSetGarbarge();
+            totalGamesWon++;
+            $("#winBrowser").text(totalGamesWon);
         }
         
         if (remainChoice === 0) {
-            loser();
-            // remainChoice = 8;
+            totalGamesLost++;
+            $("#lostBrowser").text(totalGamesLost);
+            var playAgain = confirm("You lose; Play again?");
+            if (playAgain === true){
+                objCall();
+            }
+            else {
+                alert("Too bad, loser. Play!")
+                objCall();
+            }
+            
+            remainChoice = 8;
         }
 
-        var allUserChoices = throwAwayLetter;
+        var trash = allUserChoices;
+        garbageLetters(trash);
         $("#picks").prepend($("<span>").text(allUserChoices));
     }
     
@@ -92,11 +102,9 @@ $(document).ready(function(){
         function finder (findNum) {
             if ( findNum !== -1) {
                 stringer(findNum);
-            }               
+            }
+                        
         }
-
-        // debugger
-        
         function stringer(stringNum){
             var strIndex = stringNum.toString();
             var spanIdStr = "#10" + strIndex;
@@ -110,32 +118,28 @@ $(document).ready(function(){
     
     $("#userText").on("keyup", function mainFunction(event) {
         var userChoice = event.key.toLowerCase();
-        
-        
         checkLetter(userChoice);
 
             function checkLetter (letterToBeChecked){
                 
                 this.letterToBeChecked = letterToBeChecked
-                var garbChecker = currentGarbageArr.includes(this.letterToBeChecked);
-                console.log("key: " + garbChecker)
+                var ddd = currentGarbageArr.includes(this.letterToBeChecked);
+                console.log("key: " + ddd)
                 console.log("arr in btn: " + currentGarbageArr)
-                if (garbChecker === true){
+                if (ddd === true){
                     alert("done already");
                 }
                 else {
                     var testLetter = currentGameArr.includes(letterToBeChecked);
                     if ( testLetter === true) {
                         goodLetter(letterToBeChecked, 0)
-                        garbageLetters(userChoice);
                     }
                     else if ( testLetter === false) {
-                        remainChoice--    
-                        garbageLetters(userChoice);    
+                        remainChoice--        
                         
                     }
                 }
-                
+                setBoard(userChoice);
             }
 
 
@@ -150,42 +154,25 @@ $(document).ready(function(){
         currentGameArr = currentGameObj.arr1;
         console.log("objCall array: " + currentGameArr);
         setStart(currentGameArr);
-        
-        objSetGarbarge(currentGameObj);
-        objSetImage(currentGameObj);
-
-        function objSetGarbarge (currentGameObj) {
-            singleGarbageObj = currentGameObj
-            console.log(singleGarbageObj);
-            currentGarbageObj = $.each(singleGarbageObj, function(value, index){
-            });
-           
-            currentGarbageArr = currentGarbageObj.garbArr;
-            console.log(currentGarbageArr);
-            setStartGarbCollector(currentGarbageArr);
-        }
-        function objSetImage (currentGameObj) {
-            singleImageObj = currentGameObj
-            console.log(singleImageObj);
-            currentImageObj = $.each(singleImageObj, function(value, index){
-            });
-           
-            currentImageLink = currentImageObj.link;
-            $("#placehold").attr("src", currentImageLink)
-            console.log("link starter: " + currentImageLink);
-
-        }
+    }
+    function objSetGarbarge () {
+        singleGarbageObj = allGameObj.pop()
+        currentGarbageObj = $.each(singleGarbageObj, function(value, index){
+        });
+       
+        currentGarbageArr = currentGarbageObj.garbArr;
+        console.log("objCall array: " + currentGarbageArr);
+        setStartGarbCollector(currentGarbageArr);
     }
 
     $("#newGameBtn").on("click", function gamePlay(event) {
         objCall();
+        objSetGarbarge();
         $(".myForm").show( "slow" );
     });
     $("#reLoad").on("click", function reloadPage(event) {
         location.reload();
     });
-
-    // setBoard();
 
 
     
