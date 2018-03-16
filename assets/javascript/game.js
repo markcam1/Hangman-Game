@@ -4,41 +4,42 @@ $(document).ready(function(){
     
     var userChoice;
     var remainChoice = 8;
-    var spanTag = 100;
+    var spanTag = 0;
     var lettersToWin = 0;
     var currentGameArr = [];
-    var doneLetters = [];
     var garbChecker = [];
     var totalGamesWon = 0;
     var totalGamesLost = 0;
 
-
-    var hunchObj = { arr1: ["q", "u", "a","s","i","m","o","d","o"], garbArr: [], gameName: "hunch", link: "assets/images/hunch.png"};
-    var psychoObj = { arr1: ["n","o","r","m","a","n","b","a","t","e","s"], garbArr: [], gameName: "psycho", link: "assets/images/psy.jpg"};
+    var hunchObj = { arr1: ["q", "u", "a","s","i","m","o","d","o"], garbArr: [], gameName: "Hunch", link: "assets/images/hunch.png"};
+    var psychoObj = { arr1: ["n","o","r","m","a","n","b","a","t","e","s"], garbArr: [], gameName: "Psycho", link: "assets/images/psy.jpg"};
     var sawObj = { arr1: ["b", "i", "l", "l", "y"], garbArr: [], gameName: " Jigsaw", link: "assets/images/saw.jpg"};
-    var nightObj = { arr1: ["f","r","e","d","d","y"], garbArr: [], gameName: "Nightmare", link: "assets/images/fred.jpg"};
+    var nightObj = { arr1: ["f","r","e","d","d","y","k","r","u","e","g","e","r"], garbArr: [], gameName: "Nightmare", link: "assets/images/fred.jpg"};
+    var itObj = { arr1: ["p","e","n","n","y","w","i","s","e","t","t","h","e","d","d","a","n","c","i","n","g","c","l","o","w","n"], garbArr: [], gameName: "It", link: "assets/images/penny.jpg"};
     
-    var allGameObj = [nightObj, sawObj, psychoObj, hunchObj];
+    var allGameObj = [sawObj, nightObj, itObj, psychoObj, hunchObj];
     
     function setStart(arrV){
-        //set html before blank letter load
+        //set html data
         $("#posKeep").remove();
         $("#posParent").append($("<h2>").attr("id", "posKeep"));
 
+        //load array and set blanks
         $(arrV).each(function(){
             spanNum = spanTag;
+            var startStringIndex = spanNum.toString();
             lettersToWin++;
 
-            $("#posKeep").append($("<span>").attr("id", spanNum).text(" __ "))
+            $("#posKeep").append($("<span>").attr("id", startStringIndex).text(" __ "))
             $("#remain").text(this.remainChoice);
             spanTag++
         }); 
-        spanTag = 100;
-        
+        spanTag = 0;
     };
+
+    //collect used letters for latest string
     function setStartGarbCollector(currentGarbageArr){
         $("#picks").empty();
-
         window.currentGarbageArr = currentGarbageArr;
     };
     function garbageLetters(throwAwayLetter){
@@ -46,6 +47,7 @@ $(document).ready(function(){
         setBoard(throwAwayLetter);
     }
 
+    //set win/lose score
     function winner(){
         objCall();
         totalGamesWon++;
@@ -53,27 +55,23 @@ $(document).ready(function(){
         $("#winBrowser").text(totalGamesWon);
     }
 
-    function loser (){
-        totalGamesLost++;
-        $("#lostBrowser").text(totalGamesLost);
-        remainChoice = 8;
+    function loser(){
         objCall();
+        totalGamesLost++;
+        $("#lostBrowser").text(totalGamesLost).toggle( "highlight" );
+        remainChoice = 8;
     }
 
+    //check current score and file used letters
     function setBoard(throwAwayLetter){
-        
         this.remainChoice = remainChoice;
         $("#remain").text(this.remainChoice);
-        console.log("board remain: " + remainChoice);
 
         if (lettersToWin === 0 ) {
-            // objSetGarbarge();
             winner();
         }
-        
         if (remainChoice === 0) {
             loser();
-            // remainChoice = 8;
         }
 
         var allUserChoices = throwAwayLetter;
@@ -81,12 +79,9 @@ $(document).ready(function(){
     }
     
     function goodLetter (goodStr, startIndex){
-        
-
         this.goodStr = goodStr
         this.startIndex = startIndex
         var indexNum = currentGameArr.indexOf(this.goodStr, this.startIndex);
-        console.log("good num b4 finder: " + indexNum)
 
         finder(indexNum) 
         function finder (findNum) {
@@ -94,34 +89,25 @@ $(document).ready(function(){
                 stringer(findNum);
             }               
         }
-
         // debugger
-        
         function stringer(stringNum){
             var strIndex = stringNum.toString();
-            var spanIdStr = "#10" + strIndex;
+            var spanIdStr ="#" + strIndex;
             $(spanIdStr).text(currentGameArr[stringNum]);
             lettersToWin--
             goodLetter(goodStr, stringNum + 1);
         }
-        
     }
 
-    
     $("#userText").on("keyup", function mainFunction(event) {
         var userChoice = event.key.toLowerCase();
-        
-        
         checkLetter(userChoice);
-
             function checkLetter (letterToBeChecked){
-                
                 this.letterToBeChecked = letterToBeChecked
                 var garbChecker = currentGarbageArr.includes(this.letterToBeChecked);
-                console.log("key: " + garbChecker)
-                console.log("arr in btn: " + currentGarbageArr)
+
                 if (garbChecker === true){
-                    alert("done already");
+                    alert("That letter used already, my soon dead friend.");
                 }
                 else {
                     var testLetter = currentGameArr.includes(letterToBeChecked);
@@ -132,14 +118,9 @@ $(document).ready(function(){
                     else if ( testLetter === false) {
                         remainChoice--    
                         garbageLetters(userChoice);    
-                        
                     }
                 }
-                
-            }
-
-
-        
+            }   
     });
     
     function objCall () {
@@ -153,27 +134,31 @@ $(document).ready(function(){
         
         objSetGarbarge(currentGameObj);
         objSetImage(currentGameObj);
+        objHint(currentGameObj);
 
         function objSetGarbarge (currentGameObj) {
             singleGarbageObj = currentGameObj
-            console.log(singleGarbageObj);
             currentGarbageObj = $.each(singleGarbageObj, function(value, index){
             });
            
             currentGarbageArr = currentGarbageObj.garbArr;
-            console.log(currentGarbageArr);
             setStartGarbCollector(currentGarbageArr);
         }
         function objSetImage (currentGameObj) {
             singleImageObj = currentGameObj
-            console.log(singleImageObj);
             currentImageObj = $.each(singleImageObj, function(value, index){
             });
            
             currentImageLink = currentImageObj.link;
             $("#placehold").attr("src", currentImageLink)
-            console.log("link starter: " + currentImageLink);
-
+        }
+        function objHint (currentGameObj) {
+            singleHintObj = currentGameObj
+            currentHintObj = $.each(singleHintObj, function(value, index){
+            });
+           
+            currentHintText = currentHintObj.gameName;
+            $("#hint").text(currentHintText)
         }
     }
 
@@ -184,39 +169,6 @@ $(document).ready(function(){
     $("#reLoad").on("click", function reloadPage(event) {
         location.reload();
     });
-
-    // setBoard();
-
-
-    
-
-   
-    
-
-
-
-
-
-
-
-
-    // function toggleGamePlay() {
-    //     if (endGame !== true)
-    //     {
-    //         endGame = false;
-    //     } else if (endGame)
-    //     {
-    //     endGame= false;
-    //     }
-
-    // }      
-
-
-
-
-    
-    
-
 });    
     
 

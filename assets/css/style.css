@@ -11,8 +11,7 @@ body{
 }
 
 .jumbotron {
-    background-image: url(../images/svBG.png);
-    
+    background-image: url(../images/svBG.png); 
 } 
 
 .executioner {
@@ -20,6 +19,43 @@ body{
     width: 150px;
 }
 
-h1 {
-    font-family: fantasy;
+.jumbotron, h1 {
+    font-family: 'Nothing You Could Do', cursive;
+}
+
+#hm {
+    color: #8A0707;
+}
+
+.panel-body {
+    background: #f0f0f5;
+}
+
+.footer-copyright {
+    color: #f0f0f5
+}
+
+.footer-copyright, a {
+    color: #f0f0f5
+}
+
+.img-responsive {
+    border:1px solid #8A0707;
+}
+
+#winpanel {
+    color: white;
+    background: green;
+}
+#winBrowser {
+    color: white;
+    background: green;
+}
+#losepanel {
+    color: white;
+    background: #8A0707;
+}
+#lostBrowser {
+    color: white;
+    background: #8A0707;
 }
