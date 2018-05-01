@@ -19,7 +19,7 @@ Please give me your input! I want to make contributing to this project as easy a
    do not have permission to do that, you may request the second reviewer to merge it for you.
 
 ## Report bugs using Github's [issues](https://github.com/markcam1/Hangman-Game/issues)
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](); it's that easy!
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/markcam1/Hangman-Game/issues); it's that easy!
 
 ## Write bug reports with detail, background, and sample code
 [Bug report Template](https://gist.github.com/carlo/3402842).
