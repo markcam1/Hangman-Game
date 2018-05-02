@@ -1,19 +1,11 @@
-# giftastic by Cameron
+# Hangman-Game
 
-This production allows a user to display GIFs (Graphics Interchange Format)
-using prepopulated buttons or adding their own buttons that call the 
-[Giphy-api]( https://developers.giphy.com/).
-
-Other features include:
-1.	Double-clicking the GIF to animate or halt the GIF animation
-2.	Adding/removing GIF/s to favorites and saving to local storage
-3.	Taking users to the download site
-
-This production employs HTML, the HTML5’s data-attributes, JavaScript/jQuery and ajax calls.
+-This is an interactive game using HTML/CSS and JavaScript/jQuery. 
+-*Hangman* is a word game where the user tries to guess the entire word by guessing one letter at a time
 
 ---
 
-[giftastic](https://markcam1.github.io/giftastic/) - the deployed website is here.
+[Hangman](https://markcam1.github.io/Hangman-Game/) - full game can be played here
 
 ![Site Preview](https://github.com/markcam1/markcam1.github.io/blob/master/assets/images/hang.jpg)
 
@@ -22,9 +14,9 @@ This production employs HTML, the HTML5’s data-attributes, JavaScript/jQuery a
 ## Setup
 ### Prerequisites
 ```
-A basic understanding of HTML and CSS is needed.
-Bootstrap CSS is used, but not necessary.
-This is for those with some JavaScript experience.
+*	A basic understanding of HTML and CSS is needed.
+*	Bootstrap CSS is used, but not necessary.
+*	This is a simple example suited for JavaScript beginners.
 ```
 ### Installing
 ```
@@ -33,27 +25,25 @@ This is for those with some JavaScript experience.
 You will be starting with my base code. 
 
 ```
-If you want to make changes, navigate to the JavaScript file (assets/javascript/) and change the code. 
-In order to query the Giphy API, you will need an API key (see below).
+If you want to change the word list, navigate to the JavaScript file (assets/javascript) and change the object variables. 
+The Images can be found in (assets/images)
 ```
-[GIPHY-API access key](https://giphy.com/login/?next=/oauth/authorize/%3Fresponse_type%3Dcode%26client_id%3DC7yftGDVCAhmaTnJCKv3eNaRsANYTDDf7PA9jZbw%26redirect_uri%3Dhttps%253A%252F%252Fdevelopers.giphy.com%252Foauth%252Fexchange%252F)
 
 ## Built With
 * [jQuery](http://jquery.com/) - jQuery
 * [Bootstrap](https://getbootstrap.com/) - CSS & JavaScript
-* [google fonts](https://fonts.google.com/) - Used for some Fonts
-* [GIPHY API](https://developers.giphy.com/docs/) - GIF library
+* [google fonts](https://fonts.google.com/) - Used for some Fonts 
 
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to me.
 
 ## Versioning
-Use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/markcam1/giftastic/tags). 
+Use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/markcam1/Hangman-Game/tags). 
 
 ## Authors
 * **Mark Cameron** - *Initial work* - [Mark C](https://markcam1.github.io/)
 
-See also the list of [contributors](https://github.com/markcam1/giftastic/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/markcam1/Hangman-Game/graphs/contributors) who participated in this project.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
