@@ -1,7 +1,7 @@
 # Hangman-Game
 
--This is an interactive game using HTML/CSS and JavaScript/jQuery. 
--*Hangman* is a word game where the user tries to guess the entire word by guessing one letter at a time
+*Hangman* is a word game where the user tries to guess the entire word by guessing one letter at a time.
+This is an interactive game using HTML/CSS and JavaScript/jQuery. 
 
 ---
 
